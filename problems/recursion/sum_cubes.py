@@ -1,4 +1,4 @@
-def sum_cubes(n):
+def sum_cubes(n: int) -> int:
     """
     Recursively calculates the sum of the first n positive cubes.
     Input:
@@ -9,7 +9,10 @@ def sum_cubes(n):
     This function may not use any loops or list comprehensions.
     """
 
-    pass
+    if n == 1:
+        return 1
+
+    return n**3 + sum_cubes(n - 1)
 
 
 #############################################################
@@ -27,7 +30,7 @@ import test_utils as utils
 def do_test_sum_cubes(n):
     recreate_msg = utils.gen_recreate_msg('sum_cubes', n)
     actual = sum_cubes(n)
-    expected = sum(n ** 3 for n in range(n + 1))
+    expected = sum(n ** 3 for n in range(0, n + 1))
     utils.check_none(actual, recreate_msg)
     utils.check_type(actual, expected, recreate_msg)
     utils.check_equals(actual, expected, recreate_msg)
