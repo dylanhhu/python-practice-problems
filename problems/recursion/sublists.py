@@ -1,4 +1,4 @@
-def sublists(lst):
+def sublists(lst: list) -> 'list[list]':
     """
     Computes all sublists of the input list.
     Input:
@@ -7,7 +7,17 @@ def sublists(lst):
     Returns: (list of list of values) list of all sublists of lst.
     """
 
-    pass
+    if len(lst) == 0:
+        return [[]]
+
+    new_sublists = []
+
+    s_lists = sublists(lst[1:])
+
+    for sublist in s_lists:
+        new_sublists.append([lst[0]] + sublist)
+
+    return new_sublists + s_lists
 
 
 #############################################################
