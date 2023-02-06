@@ -1,3 +1,5 @@
+import numpy as np
+
 def compute_matching(x, y):
     """
     Returns a new array which is "true" everywhere x == y and 
@@ -11,7 +13,7 @@ def compute_matching(x, y):
 
     # YOUR CODE HERE
     # Replace None with an appropriate return value
-    return None
+    return x == y
 
 
 #############################################################
