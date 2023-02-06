@@ -1,4 +1,6 @@
-def select_row_col(x, row_idx=None, col_idx=None):
+import numpy as np
+
+def select_row_col(x: np.ndarray, row_idx=None, col_idx=None):
     """
     Select a subset of rows or columns in the two-dimensional array x. 
     Inputs:
@@ -8,10 +10,15 @@ def select_row_col(x, row_idx=None, col_idx=None):
     Returns: a two-dimensional array where we have selected based on the 
         specified row_idx and col_idx
     """
+    if row_idx is None:
+        row_idx = list(range(x.shape[0]))
 
-    # YOUR CODE HERE
-    # Replace None with an appropriate return value
-    return None
+    if col_idx is None:
+        col_idx = list(range(x.shape[1]))
+
+    return x[row_idx, :][:, col_idx]
+
+    
 
 
 #############################################################
