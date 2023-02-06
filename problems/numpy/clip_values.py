@@ -1,4 +1,6 @@
-def clip_values(x, min_val=None, max_val=None):
+import numpy as np
+
+def clip_values(x: np.ndarray, min_val=None, max_val=None):
     """
     Return a new array with the values clipped. 
     If min_val is set, all values < min_val will be set to min_val
@@ -11,10 +13,15 @@ def clip_values(x, min_val=None, max_val=None):
     returns: an array with the same dimensions of X with values clipped
              to (min_val, max-val)
     """
+    new_array = x.copy()
 
-    # YOUR CODE HERE
-    # Replace None with an appropriate return value
-    return None
+    if min_val is not None:
+        new_array[new_array < min_val] = min_val
+    
+    if max_val is not None:
+        new_array[new_array > max_val] = max_val
+
+    return new_array
 
 
 #############################################################
