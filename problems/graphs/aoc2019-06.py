@@ -9,7 +9,7 @@ import os
 import re
 
 
-def part1(orbits):
+def part1(orbits: 'dict[str, str]') -> int:
     """
     Solves Part 1 (see problem statement for more details)
 
@@ -19,11 +19,18 @@ def part1(orbits):
 
     Returns an integer
     """
-    ### Replace with your code
-    return None
+    count = 0
+
+    for object in orbits.values():
+        count += 1
+
+        while object := orbits.get(object, False):
+            count += 1
+
+    return count
 
 
-def part2(orbits):
+def part2(orbits: 'dict[str, str]') -> int:
     """
     Solves Part 2 (see problem statement for more details)
 
@@ -33,9 +40,43 @@ def part2(orbits):
 
     Returns an integer
     """
-    ### Replace with your code
-    return None
+    adjacency: 'dict[str, set[str]]' = {}
 
+    # Create undirected graph
+    for satellite, object in orbits.items():
+        if satellite not in adjacency:
+            adjacency[satellite] = set(object)
+        else:
+            adjacency[satellite].add(object)
+        
+        if object not in adjacency:
+            adjacency[object] = set(satellite)
+        else:
+            adjacency[object].add(satellite)
+
+    visited = set()
+    queue = []
+    start = 'YOU'
+    end = orbits['SAN']
+    queue.append(start)
+
+    return bfs(adjacency, visited, start, end, 0)
+
+
+def bfs(adjacency, visited, curr, end, count):
+    if curr == end:
+        return count
+    
+    counts = []
+    visited.add(curr)
+
+    for neighbor in adjacency[curr]:
+        if neighbor not in visited:
+            if count := bfs(adjacency, visited, neighbor, end, count + 1):
+                counts.append(count)
+        
+    return min(counts) if counts else None
+    
 
 
 ############################################
@@ -69,4 +110,4 @@ if __name__ == "__main__":
     print(f"Part 1:", part1(orbits))
     
     # Uncomment the following line when you're ready to work on Part 2
-    #print(f"Part 2:", part2(orbits))
+    print(f"Part 2:", part2(orbits))
