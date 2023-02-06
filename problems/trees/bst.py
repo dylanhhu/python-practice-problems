@@ -22,6 +22,9 @@ class Empty:
     def insert(self, n):
         return Node(n, Empty(), Empty())
 
+    def path_to(self, n):
+        return None
+
 
 class Node:
 
@@ -91,6 +94,14 @@ class Node:
             return None
         
         return self.right.height() - self.left.height()
+    
+    def path_to(self, n):
+        if n < self.value:
+            return [self.value] + self.left.path_to(n)
+        elif n > self.value:
+            return [self.value] + self.right.path_to(n)
+        else:
+            return [self.value]
 
 
 if __name__ == "__main__":
@@ -102,5 +113,4 @@ if __name__ == "__main__":
     print(bst.inorder())
     print(bst.min_item())
     print(bst.max_item())
-    print(bst.balance_factor())
-    print(bst.balanced_everywhere())
+    print(bst.path_to(15))
