@@ -1,4 +1,6 @@
-def compute_matching_indices(x, y):
+import numpy as np
+
+def compute_matching_indices(x: np.ndarray, y: np.ndarray):
     """
     Returns a new array consisting of the indices where
     x == y.
@@ -8,10 +10,10 @@ def compute_matching_indices(x, y):
     Returns: a sorted array of the indices where x[i] == y[i]
     Note that the returned array must be one-dimensional! 
     """
+    indices = np.arange(0, x.shape[0])
 
-    # YOUR CODE HERE
-    # Replace None with an appropriate return value
-    return None
+    return indices[x == y]
+
     
 
 #############################################################
