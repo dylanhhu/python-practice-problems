@@ -58,9 +58,49 @@ class Node:
         else:
             return self
 
+    def inorder(self):
+        if self.is_leaf():
+            return [self.value]
+        
+        items = []
+
+        if not self.left.is_empty():
+            items.extend(self.left.inorder())
+
+        items.append(self.value)
+
+        if not self.right.is_empty():
+            items.extend(self.right.inorder())
+
+        return items
+
+    def min_item(self):
+        if self.left.is_empty():
+            return self.value
+
+        return self.left.min_item()
+
+    def max_item(self):
+        if self.right.is_empty():
+            return self.value
+
+        return self.right.max_item()
+
+    def balance_factor(self):
+        if self.is_leaf():
+            return None
+        
+        return self.right.height() - self.left.height()
+
 
 if __name__ == "__main__":
     bst = Empty().insert(42).insert(10).insert(15).insert(63)
 
     print(f"The number of nodes is {bst.num_nodes()}")
     print(f"The height is {bst.height()}")
+
+    print(bst.inorder())
+    print(bst.min_item())
+    print(bst.max_item())
+    print(bst.balance_factor())
+    print(bst.balanced_everywhere())
