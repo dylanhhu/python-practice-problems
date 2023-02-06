@@ -1,6 +1,6 @@
 from tree import Tree
 
-def prune_tree(tree, keys_to_discard):
+def prune_tree(tree: Tree, keys_to_discard: set) -> '(Tree | None)':
     '''
     Returns a new tree with that is identical to the original tree, except
     that any node whose key is in keys_to_discard is removed, along with its
@@ -14,7 +14,19 @@ def prune_tree(tree, keys_to_discard):
     Returns: (Tree) the pruned tree.
     '''
     
-    pass
+    if tree.key in keys_to_discard:
+        return None
+    
+    new_children = []
+
+    for child in tree.children:
+        if (pruned_child := prune_tree(child, keys_to_discard)):
+            new_children.append(pruned_child)
+
+    new_tree = Tree(tree.key, tree.value)
+    new_tree.children = new_children
+
+    return new_tree
 
 
 #############################################################
