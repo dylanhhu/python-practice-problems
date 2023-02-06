@@ -1,4 +1,6 @@
-def find_closest_value(x):
+import numpy as np
+
+def find_closest_value(x: np.ndarray):
     """
     Returns the index and corresponding value in the one-dimensional 
     array x that is closest to the mean 
@@ -10,10 +12,17 @@ def find_closest_value(x):
     Returns: the index and the scalar value in x that is 
         closest to the mean
     """
-    
-    # YOUR CODE HERE
-    # Replace None with an appropriate return value
-    return None
+    mean = x.mean()
+
+    diffs = np.abs(x - mean)
+
+    min_diff = min(diffs)
+
+    indices = np.arange(x.shape[0])
+
+    index = indices[diffs == min_diff][0]
+
+    return (index, x[index])
     
 
 #############################################################
