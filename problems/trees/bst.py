@@ -25,6 +25,9 @@ class Empty:
     def path_to(self, n):
         return None
 
+    def add_to_all(self, n):
+        return
+
 
 class Node:
 
@@ -103,6 +106,16 @@ class Node:
         else:
             return [self.value]
 
+    def add_to_all(self, n):
+        if self.is_leaf():
+            self.value += n
+            return
+
+        self.value += n
+        
+        self.left.add_to_all(n)
+        self.right.add_to_all(n)
+
 
 if __name__ == "__main__":
     bst = Empty().insert(42).insert(10).insert(15).insert(63)
@@ -114,3 +127,5 @@ if __name__ == "__main__":
     print(bst.min_item())
     print(bst.max_item())
     print(bst.path_to(15))
+    bst.add_to_all(100)
+    print(bst.path_to(115))
