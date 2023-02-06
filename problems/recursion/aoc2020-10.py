@@ -8,7 +8,7 @@ import sys
 import os
 
 
-def part1(jolts):
+def part1(jolts: 'list[int]') -> int:
     """
     Solves Part 1 (see problem statement for more details)
 
@@ -18,11 +18,33 @@ def part1(jolts):
     Returns an integer
     """
 
-    ### Replace with your code
-    return None
+    # Replace with your code
+    num_1_jolt = 0
+    num_3_jolt = 0
+
+    jolts.sort()  # sort the list
+    jolts.append(jolts[-1] + 3)
+
+    first_diff = jolts[0] - 0
+    if first_diff == 1:
+        num_1_jolt += 1
+    elif first_diff == 3:
+        num_3_jolt += 1
+
+    for i, jolt in enumerate(jolts[1:]):
+        diff = jolt - jolts[i]
+
+        # print(i, ' ', jolt, ' ', diff, ' ', num_1_jolt, ' ', num_3_jolt)
+
+        if diff == 1:
+            num_1_jolt += 1
+        elif diff == 3:
+            num_3_jolt += 1
+
+    return num_1_jolt * num_3_jolt
 
 
-def part2(numbers):
+def part2(jolts: 'list[int]') -> int:
     """
     Solves Part 2 (see problem statement for more details)
 
@@ -32,7 +54,7 @@ def part2(numbers):
     Returns an integer
     """
 
-    ### Replace with your code
+    # Your code goes here
     return None
 
 
@@ -60,6 +82,4 @@ if __name__ == "__main__":
         jolts = [int(x) for x in f.read().split()]
 
     print(f"Part 1:", part1(jolts))
-    
-    # Uncomment the following line when you're ready to work on Part 2
-    #print(f"Part 2:", part2(jolts))
+    print(f"Part 2:", part2(jolts))
